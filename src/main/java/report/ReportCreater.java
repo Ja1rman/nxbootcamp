@@ -20,7 +20,7 @@ public class ReportCreater {
         this.phoneNumber = phoneNumber;
         this.calls = calls;
     }
-
+    // Создаём данные для выходного файла
     private StringBuilder outputGenerator() {
         StringBuilder sb = new StringBuilder();
         sb.append("Tariff index: ").append(calls.get(0).getTariffType()).append("\n");
@@ -36,7 +36,7 @@ public class ReportCreater {
             Duration dur = Duration.ofSeconds(dateDifference);//   .ofMillis(dateDifference*1000);
             String duration = String.format("%02d:%02d:%02d", dur.toHours(),
                     dur.toMinutesPart(), dur.toSecondsPart());
-
+            // Звонок вычисляется как количество минут(округляется в большую сторону) умножить на стоимость по тарифу
             double cost = calc.calculate(call.getCallType(), (long) Math.ceil((double)dateDifference/60));
             String pattern = "yyyy-MM-dd HH:mm:ss";
             DateFormat df = new SimpleDateFormat(pattern);
@@ -57,11 +57,11 @@ public class ReportCreater {
 
         return sb;
     }
-
+    // Вычисляем количество секунд, которое длился звонок
     private long getDateDifference(Date startCall, Date endCall) {
         return (endCall.getTime() - startCall.getTime())/1000;
     }
-
+    // Сохранение в файл текущего пользователя
     public void outputSave() throws FileNotFoundException {
         StringBuilder output = outputGenerator();
         String outputPath = "./reports/report_" + phoneNumber + ".txt";
