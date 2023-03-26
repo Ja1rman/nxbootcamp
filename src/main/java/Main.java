@@ -7,6 +7,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
+
 public class Main {
     public static void main(String[] args) throws IOException {
         CDRparser data = new CDRparser("./data/cdr.txt");
@@ -17,7 +18,5 @@ public class Main {
             ReportCreater temp = new ReportCreater(key, arr);
             temp.outputSave();
         }
-
-
     }
 }
