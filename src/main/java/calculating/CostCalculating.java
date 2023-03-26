@@ -12,7 +12,7 @@ public class CostCalculating {
             totalCost += 100;
         }
     }
-
+    // Вычисление стоимости текущего звонка 
     public double calculate(String callType, long minutes) {
         double cost = 0;
         switch (tariffType) {
