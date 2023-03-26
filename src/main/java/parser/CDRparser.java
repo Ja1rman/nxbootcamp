@@ -64,22 +64,18 @@ public class CDRparser {
                 assert tariffType != null;
                 // Добавляем вычисленные значения в общий map
                 List<UserModel> itemsList = users.get(phoneNumber);
+                UserModel newCall = new UserModel(
+                        callType,
+                        startCall,
+                        endCall,
+                        tariffType
+                );
                 if(itemsList == null) {
                     itemsList = new ArrayList<>();
-                    itemsList.add(new UserModel(
-                            callType,
-                            startCall,
-                            endCall,
-                            tariffType
-                    ));
+                    itemsList.add(newCall);
                     users.put(phoneNumber, itemsList);
                 } else {
-                    itemsList.add(new UserModel(
-                            callType,
-                            startCall,
-                            endCall,
-                            tariffType
-                    ));
+                    itemsList.add(newCall);
                 }
                 line = br.readLine();
             }
