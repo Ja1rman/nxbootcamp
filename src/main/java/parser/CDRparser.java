@@ -30,7 +30,7 @@ public class CDRparser {
                 String tariffType = null;
                 String[] parts = line.split(", ");
                 for (String part : parts) {
-                    switch (part) {
+                    switch (part) { // так как cdr файл может быть разным, парсим значения для любой ситуации
                         case "01":
                         case "02":
                             callType = part;
@@ -62,6 +62,7 @@ public class CDRparser {
                 assert startCall != null;
                 assert endCall != null;
                 assert tariffType != null;
+                // Добавляем вычисленные значения в общий map
                 List<UserModel> itemsList = users.get(phoneNumber);
                 if(itemsList == null) {
                     itemsList = new ArrayList<>();
@@ -85,14 +86,11 @@ public class CDRparser {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
         return users;
     }
-
+    // Конвертируем строку в дату по указанному формату
     private Date stringToDate(String stringDate) throws ParseException {
         DateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
         return format.parse(stringDate);
     }
-
-
 }
